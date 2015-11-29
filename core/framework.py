@@ -59,7 +59,7 @@ class Framework:
                 print("{} framework cannot be loaded due to a __init__ error: {}".format(fw, q), "FRAMEWORK", "lightred")
             return
         self.loaded += 1
-        print("Framework {} successfully loaded.".format(fw), "CONFIG", "lightgreen")
+        print("Framework {} successfully loaded.".format(fw), "FRAMEWORK", "lightgreen")
 
 def importer(cl):
     d = cl.rfind(".")
