@@ -20,6 +20,7 @@
 """
 
 notworking = False
+frameworkworking = True
 
 import os, os.path, subprocess
 
@@ -33,9 +34,10 @@ except:
     notworking = True
     print("Detected core.jedabot as not working!")
 try:
-    import core.framework
+    from core.framework import Framework
 except:
     notworking = True
+    frameworkworking = False
     print("Detected core.framework as not working!")
 try:
     import core.config
@@ -67,24 +69,33 @@ print("Step 1/2 completed.\n")
 print("Step 2/2: Test frameworks")
 def core():
     print("meh")
-def importer(cl):
+if frameworkworking:
+    frameworks = os.listdir("framework")
+    framework = Framework(core, frameworks)
+    for fw in frameworks:
+        if not fw in framework.frameworks:
+            print("Detected {} framework as not working!".format(fw))
+        else:
+            print("Tested: {} framework".format(fw))
+else:
+    def importer(cl):
         d = cl.rfind(".")
         classname = cl[d + 1:len(cl)]
         m = __import__(cl[0:d], globals(), locals(), [classname])
         return getattr(m, classname)
-for fw in os.listdir("framework"):
-    try:
-        framework = imp.reload(sys.modules['framework.' + fw + '.' + fw])
-    except:
+    for fw in os.listdir("framework"):
         try:
-            framework = importer('framework.' + fw + '.' + fw)
-        except ImportError as q:
+            framework = imp.reload(sys.modules['framework.' + fw + '.' + fw])
+        except:
+            try:
+                framework = importer('framework.' + fw + '.' + fw)
+            except ImportError as q:
+                print("Detected {} framework as not working!".format(fw))
+        try:
+            getattr(framework, fw)(core, core)
+        except Exception as q:
             print("Detected {} framework as not working!".format(fw))
-    try:
-        getattr(framework, fw)(core, core)
-    except Exception as q:
-        print("Detected {} framework as not working!".format(fw))
-    print("Tested: {} framework".format(fw))
+        print("Tested: {} framework".format(fw))
 print("Step 2/2 completed.")
 
 print("All done!")

@@ -22,7 +22,7 @@ import signal
 import sys
 import time
 import urllib.request, urllib.parse
-from .print import print
+from .logger import print
 from .version import __bot__, __botw__, __version__, __cversion__, __api__
 from .framework import Framework as f
 from .config import Config as c

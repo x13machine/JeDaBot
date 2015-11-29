@@ -19,7 +19,7 @@
 """
 import imp
 import os, os.path
-from .print import print
+from .logger import print
 
 class Framework:
     def __init__(self, core, frameworks):
@@ -62,7 +62,7 @@ class Framework:
         print("Framework {} successfully loaded.".format(fw), "CONFIG", "lightgreen")
 
 def importer(cl):
-        d = cl.rfind(".")
-        classname = cl[d + 1:len(cl)]
-        m = __import__(cl[0:d], globals(), locals(), [classname])
-        return getattr(m, classname)
+    d = cl.rfind(".")
+    classname = cl[d + 1:len(cl)]
+    m = __import__(cl[0:d], globals(), locals(), [classname])
+    return getattr(m, classname)

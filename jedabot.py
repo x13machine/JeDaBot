@@ -19,7 +19,6 @@
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 from core.jedabot import JeDaBot
-from core.print import print
 import signal
 
 if __name__ == "__main__":

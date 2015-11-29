@@ -16,12 +16,33 @@
    with this program; if not, write to the Free Software Foundation, Inc.,
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
-import os
 from .version import __bot__
 import sys
+import time
+colors = {"black": "0;30", "darkgray": "1;30", "blue": "0;34","lightblue": "1;34", "green": "0;32", "lightgreen": "1;32", "cyan": "0;36", "lightcyan": "1;36", "red": "0;31", "lightred": "1;31", "purple": "0;35", "lightpurple": "1;35", "brown": "0;33", "yellow": "1;33", "lightgray": "0;37", "white": "1;37"}
+
+class Logger:
+    def __init__(self, filename, name):
+        self.name = name
+        self.log = open("misc/{}.log".format(filename.lower()), "a")
+        self.log.write("----------{} log----------\n".format(time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())))
+
+    def print(self, text, color="lightpurple"):
+        global colors
+        try:
+            colort = colors[color]
+        except KeyError:
+            colort = "1;35"
+        sys.stdout.write("\033[1;33m[{}]\033[0m \033[{}m{}\033[0m\n".format(self.name, colort, text))
+        self.log.write("[{}] {}\n".format(self.name, text))
+
+    def close(self):
+        self.log.write("---------/{} log\---------\n\n".format(time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())))
+        self.log.close()
+        del self.log
 
 def print(text, mode="CORE", color="lightcyan"):
-    colors = {"black": "0;30", "darkgray": "1;30", "blue": "0;34","lightblue": "1;34", "green": "0;32", "lightgreen": "1;32", "cyan": "0;36", "lightcyan": "1;36", "red": "0;31", "lightred": "1;31", "purple": "0;35", "lightpurple": "1;35", "brown": "0;33", "yellow": "1;33", "lightgray": "0;37", "white": "1;37"}
+    global colors
     try:
         colort = colors[color]
     except KeyError:

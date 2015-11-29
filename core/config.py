@@ -18,7 +18,7 @@
    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 """
 import configparser
-from .print import print
+from .logger import print
 import os.path
 
 class Config:
