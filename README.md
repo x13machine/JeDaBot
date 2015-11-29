@@ -9,7 +9,6 @@ JeDaBot is a bot coded in Python 3 with ini-based config parser and sqlite for d
 1. [Features](#features)
 2. [Requirements](#requirements)
 3. [License](#license)
-4. [Sources used](#sources)
 
 ## [Features](#features)
 
