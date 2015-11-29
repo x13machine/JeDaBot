@@ -45,10 +45,10 @@ except:
     notworking = True
     print("Detected core.config as not working!")
 try:
-    import core.print
+    import core.logger
 except:
     notworking = True
-    print("Detected core.print as not working!")
+    print("Detected core.logger as not working!")
 try:
     import core.version
 except:
