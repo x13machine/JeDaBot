@@ -25,6 +25,7 @@ class Config:
     def __init__(self, config):
         self.cfg = configparser.ConfigParser()
         self.loaded = False
+        self.name = config
         print("Loading configuration file {}.cfg...".format(config), "CONFIG", "lightblue")
         if os.path.isfile('misc/{}.cfg'.format(config)):
             self.cfg.read('misc/{}.cfg'.format(config))
@@ -34,9 +35,20 @@ class Config:
         self.loaded = True
         self.sections = self.cfg.sections()
         print("Configuration file {}.cfg successfully loaded.".format(config), "CONFIG", "lightgreen")
+   
+    def setstring(self, section, name, string):
+        self.cfg[section][name] = string # wow, very simple
 
     def getstring(self, section, name):
         if name in self.cfg[section]:
             return self.cfg[section][name]
         else:
             return ""
+            
+    def savecfg(self):
+        self.cfg.write(open('misc/{}.cfg'.format(self.name), "w")) # wowverysimple
+        
+    def reloadcfg(self):
+        del self.cfg
+        self.cfg = configparser.ConfigParser()
+        self.cfg.read('misc/{}.cfg'.format(self.name)) # wownotsoverysimple
