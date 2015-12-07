@@ -24,7 +24,7 @@ class Database:
         self.sql = sqlite3.connect('misc/{}.db'.format(database))
         self.sql3 = self.sql.cursor()
 
-    def query(self, query, **kwargs):
+    def query(self, query, *kwargs):
         self.sql3.execute(query, kwargs)
         self.sql.commit()
 
