@@ -70,7 +70,7 @@ IAmConfigured = False
         if not __bot__ in self.config.sections:
             print("Cannot find {} section in config. Please fix it or remove misc/{}.cfg for regenerating the config file.".format(__bot__, __bot__.lower()))
             self.handlestop()
-        if self.config.getstring(__bot__, "IAmCOnfigured") == "False":
+        if self.config.getstring(__bot__, "IAmConfigured") == "False":
             print("Please configure {} correctly.".format(__bot__))
             self.handlestop()
         if self.config.getstring(__bot__, "Frameworks") == "":
